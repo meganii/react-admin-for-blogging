@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "contentful": "^7.2.0",
+    "contentful-management": "^5.4.0",
     "prop-types": "^15.6.2",
     "ra-data-json-server": "^2.7.0",
     "react": "^16.8.1",
