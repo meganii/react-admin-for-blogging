@@ -2,7 +2,7 @@
 import './App.css';
 
 import React from 'react';
-import { Admin, Resource, ListGuesser } from 'react-admin';
+import { Admin, Resource, ListGuesser, EditGuesser } from 'react-admin';
 import { PostList, PostEdit } from './posts';
 import { UserList } from './users';
 // import jsonServerProvider from 'ra-data-json-server';
@@ -11,7 +11,7 @@ import contentfulProvider from './contentfulProvider';
 
 const App = () => (
   <Admin dataProvider={contentfulProvider}>
-    <Resource name="entries" list={ListGuesser}/>
+    <Resource name="entries" list={ListGuesser} edit={EditGuesser} />
     {/* <Resource name="users" list={UserList} /> */}
   </Admin>
 );

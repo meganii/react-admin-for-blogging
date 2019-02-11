@@ -10,8 +10,8 @@ import {
 } from 'react-admin'
 
 const accessToken = process.env.REACT_APP_CONTENTFUL_DELIVERY_TOKEN
-const spaceId = process.env.
-const apiUrl = 'https://cdn.contentful.com/spaces/ajhr53gav30e/environments/master'
+const spaceId = process.env.REACT_APP_CONTENTFUL_SPACE_ID
+const apiUrl = `https://cdn.contentful.com/spaces/${spaceId}/environments/master`
 
 export default (type, resource, params) => {
   let url = ''
@@ -20,12 +20,31 @@ export default (type, resource, params) => {
       url = `${apiUrl}/${resource}?access_token=${accessToken}`;
       break;
     }
+    case GET_ONE: {
+      url = `${apiUrl}/${resource}/${params.id}?access_token=${accessToken}`;
+      break;
+    }
   }
 
   return fetch(url)
     .then(res => res.json())
     .then(response => {
       console.log(response)
+
+      if(!response) {
+        console.error()
+      }
+      if(!response.items) {
+        return {
+          data: {
+            id: response.sys.id,
+            title: response.fields.title,
+            slug: response.fields.slug,
+            body: response.fields.body         
+          }
+        }
+      }
+
       const data = response.items.map(item => {
         return {
           id: item.sys.id,
