@@ -52,6 +52,8 @@ export default　async (type, resource, params) => {
       const environment = await space.getEnvironment('master')
       let entry = await environment.getEntry(params.id)
       entry.fields.title = {'ja-JP': params.data.title}
+      entry.fields.slug = {'ja-JP': params.data.slug}
+      entry.fields.body = {'ja-JP': params.data.body}
       const updatedEntry = await entry.update()
       const publishedEntry = await updatedEntry.publish()
       return {

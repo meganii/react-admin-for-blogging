@@ -1,9 +1,10 @@
 import React from 'react';
 import { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditButton, DisabledInput, TextInput, LongTextInput, DateInput, ReferenceField } from 'react-admin';
 
-export const EntryList = props => (
+export const EntryList = (props) => (
     <List {...props}>
         <Datagrid>
+            <TextField source="id" />
             <TextField source="title" />
             <TextField source="slug" />
             <EditButton />
