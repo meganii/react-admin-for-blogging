@@ -26,3 +26,13 @@ export const EntryEdit = (props) => (
         </SimpleForm>
     </Edit>
 );
+
+export const EntryCreate = props => (
+    <Create {...props}>
+        <SimpleForm>
+            <TextInput source="title" />
+            <TextInput source="slug" />
+            <LongTextInput source="body" />
+        </SimpleForm>
+    </Create>
+);

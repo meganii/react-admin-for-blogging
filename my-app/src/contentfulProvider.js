@@ -47,6 +47,26 @@ export default　async (type, resource, params) => {
         }
       }
     }
+    case CREATE: {
+      const space = await client.getSpace(spaceId)
+      const environment = await space.getEnvironment('master')
+      const entry = await environment.createEntry('blogPost', {
+        fields: {
+          title: {'ja-JP': params.data.title},
+          slug: {'ja-JP': params.data.slug},
+          body: {'ja-JP': params.data.body}
+        }
+      })
+      const publishedEntry = await entry.publish()
+      return {
+        data: {
+          id: publishedEntry.sys.id,
+          title: publishedEntry.fields.title,
+          slug: publishedEntry.fields.slug,
+          body: publishedEntry.fields.body
+        }
+      }
+    }
     case UPDATE: {
       const space = await client.getSpace(spaceId)
       const environment = await space.getEnvironment('master')
